@@ -76,6 +76,8 @@ def post_detail(request, year, month, day, post):
 
     comments = post.comments.filter(active=True)
     form = CommentForm()
+    print(f"post: {post}")
+    print(f"comments: {form}")
     return render(request, 'blog/post/detail.html', {
         'post': post,
         'comments': comments,

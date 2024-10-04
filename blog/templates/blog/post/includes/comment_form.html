@@ -1,8 +1,8 @@
 <h2>Add a new comment</h2>
 <form action="{% url "blog:post_comment" post.id %}">
-    {{ form.as_p }}
+    {{ form }}
     {% csrf_token %}
     <p>
-        <button type="submit">Add comment</button>
+        <button type="submit">Add comment ....</button>
     </p>
 </form>
