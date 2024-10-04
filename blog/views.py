@@ -1,12 +1,18 @@
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post
 
 def post_list(request):
     posts = Post.objects.all()
     paginator = Paginator(posts, 3)
     page_numer = request.GET.get('page', 1)
-    posts_list = paginator.page(page_numer)
+
+    try:
+        posts_list = paginator.page(page_numer)
+    except PageNotAnInteger:
+        posts_list = paginator.page(1)
+    except EmptyPage:
+        posts_list = paginator.page(paginator.num_pages)
 
     return render(request, 'blog/post/list.html', {
         'posts': posts_list
